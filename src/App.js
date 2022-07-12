@@ -1,24 +1,22 @@
-import logo from './logo.svg';
+import { useEffect, useState, createContext } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import TableComponent from './components/Table/TableComponent';
+import User from './components/User/UserComponent';
+import { DataProvider } from './DataContext';
+import axios from 'axios';
+import 'antd/dist/antd.css';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <DataProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<TableComponent />} />
+          <Route path="/person/:userId" element={<User />} />
+        </Routes>
+      </Router>
+    </DataProvider>
   );
 }
 
